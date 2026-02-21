@@ -24,7 +24,7 @@ document.querySelectorAll(".js-pay").forEach((button) => {
   button.addEventListener("click", (event) => {
     event.preventDefault();
     alertBox.style.display = "block";
-    alertBox.textContent = "Checkout link not configured yet. Update CHECKOUT_LINKS in scripts/main.js with one live URL per plan.";
+    alertBox.textContent = "Checkout link not configured yet. Update CHECKOUT_LINKS in main.js with one live URL per plan.";
   });
 });
 
