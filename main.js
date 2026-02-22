@@ -1,7 +1,7 @@
 const CHECKOUT_LINKS = {
-  starter: "https://buy.stripe.com/REPLACE_STARTER_CHECKOUT",
-  growth: "https://buy.stripe.com/REPLACE_GROWTH_CHECKOUT",
-  scale: "https://buy.stripe.com/REPLACE_SCALE_CHECKOUT"
+  starter: "https://buy.stripe.com/14A5kDfH05RQ8XXfhd1oI00",
+  growth: "https://buy.stripe.com/3cIcN5eCW1BA2zzed91oI01",
+  scale: "https://buy.stripe.com/4gM00j3Yi2FE3DD9WT1oI02"
 };
 
 function isConfigured(url) {
