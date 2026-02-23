@@ -1,7 +1,6 @@
 const CHECKOUT_LINKS = {
-  starter: "https://buy.stripe.com/14A5kDfH05RQ8XXfhd1oI00",
-  growth: "https://buy.stripe.com/3cIcN5eCW1BA2zzed91oI01",
-  scale: "https://buy.stripe.com/4gM00j3Yi2FE3DD9WT1oI02"
+  starter20: "https://buy.stripe.com/8x2bJ13Yi5RQgqp5GD1oI03",
+  pro200: "https://buy.stripe.com/4gM3cv3Yi1BA2zz6KH1oI04"
 };
 
 function isConfigured(url) {
@@ -24,7 +23,7 @@ document.querySelectorAll(".js-pay").forEach((button) => {
   button.addEventListener("click", (event) => {
     event.preventDefault();
     alertBox.style.display = "block";
-    alertBox.textContent = "Checkout link not configured yet. Update CHECKOUT_LINKS in main.js with one live URL per plan.";
+    alertBox.textContent = "Checkout link not configured yet. Update CHECKOUT_LINKS in main.js for the $20 and $200 monthly plans.";
   });
 });
 
