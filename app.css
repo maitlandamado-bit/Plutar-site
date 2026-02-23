@@ -44,9 +44,10 @@ body {
 
 .topbar {
   padding: 14px 20px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
+  gap: 14px;
   margin-bottom: 20px;
 }
 
@@ -59,6 +60,8 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  color: var(--text);
+  text-decoration: none;
 }
 
 .brand-dot {
@@ -77,18 +80,46 @@ body {
   filter: drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.34));
 }
 
-nav {
-  display: flex;
-  gap: 16px;
+.brand-center {
+  justify-self: center;
 }
 
-nav a {
+.topbar .nav-group {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.topbar .nav-left {
+  justify-content: flex-start;
+}
+
+.topbar .nav-right {
+  justify-content: flex-end;
+}
+
+.topbar .nav-group > a {
   text-decoration: none;
   color: var(--muted);
 }
 
-nav a:hover {
+.topbar .nav-group > a:hover {
   color: var(--text);
+}
+
+.topbar .nav-group > a.booking-link {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 12px;
+}
+
+.topbar .nav-group > a.booking-link.locked {
+  color: rgba(170, 194, 222, 0.65);
+  border-color: rgba(179, 220, 255, 0.22);
+}
+
+.topbar .nav-group > a.booking-link.locked:hover {
+  color: rgba(170, 194, 222, 0.75);
 }
 
 .grid {
@@ -451,9 +482,26 @@ h3 {
 
 @media (max-width: 860px) {
   .topbar {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 10px;
-    align-items: flex-start;
+  }
+
+  .topbar .brand-center {
+    order: 1;
+  }
+
+  .topbar .nav-left {
+    order: 2;
+  }
+
+  .topbar .nav-right {
+    order: 3;
+  }
+
+  .topbar .nav-group {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px 14px;
   }
 
   .two-col {

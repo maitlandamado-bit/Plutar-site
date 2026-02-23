@@ -70,21 +70,21 @@
             "name": "Free Preview",
             "price": "0",
             "priceCurrency": "USD",
-            "url": "https://www.plutar.net/#pricing"
+            "url": "https://www.plutar.net/pricing.html"
           },
           {
             "@type": "Offer",
             "name": "Starter Monthly",
             "price": "20",
             "priceCurrency": "USD",
-            "url": "https://www.plutar.net/#pricing"
+            "url": "https://www.plutar.net/pricing.html"
           },
           {
             "@type": "Offer",
             "name": "Pro Monthly",
             "price": "200",
             "priceCurrency": "USD",
-            "url": "https://www.plutar.net/#pricing"
+            "url": "https://www.plutar.net/pricing.html"
           }
         ]
       },
@@ -94,17 +94,20 @@
 </head>
 <body>
   <div class="shell">
-    <header class="panel">
-      <div class="brand">
+    <header class="panel site-header">
+      <nav class="nav-group nav-left">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Prices</a>
+        <a href="get-started.html#flow">How It Works</a>
+      </nav>
+      <a class="brand brand-center" href="index.html">
         <img class="brand-mark" src="plutar-mark.svg" alt="Plutar logo">
         <span>Plutar</span>
-      </div>
-      <nav>
-        <a href="#systems">Systems</a>
-        <a href="#pricing">Pricing</a>
-        <a href="app.html">Software</a>
-        <a href="#contact">Start</a>
-        <a class="btn btn-ghost" href="https://calendly.com/maitlandamado/30min" target="_blank" rel="noopener">Book Call</a>
+      </a>
+      <nav class="nav-group nav-right">
+        <a href="get-started.html">Get Started</a>
+        <a href="login.html">Login</a>
+        <a class="btn btn-ghost" href="app.html">Member Booking</a>
       </nav>
     </header>
 
@@ -117,9 +120,9 @@
           You keep ownership of your stack on your own live server and avoid marketplace fee drag.
         </p>
         <div class="hero-actions">
-          <a href="#pricing" class="btn btn-primary">Start A Plan</a>
-          <a href="app.html" class="btn btn-ghost">Open Software</a>
-          <a href="#contact" class="btn btn-ghost">Custom Setup</a>
+          <a href="get-started.html" class="btn btn-primary">Get Started</a>
+          <a href="pricing.html" class="btn btn-ghost">View Prices</a>
+          <a href="login.html" class="btn btn-ghost">Login</a>
         </div>
       </div>
       <div class="metrics">
@@ -178,96 +181,49 @@
       </div>
     </section>
 
-    <section id="pricing" class="section panel">
-      <h2>Pick Your Starting Package</h2>
+    <section class="section panel">
+      <h2>Prices Are On Their Own Page</h2>
       <p class="sub">
-        Start free, then choose a monthly plan when ready. Cancel anytime.
-      </p>
-      <div class="grid-3">
-        <article class="price-card">
-          <span class="badge">Free</span>
-          <h3>Free Preview Access</h3>
-          <p class="price">$0</p>
-          <p>Good for testing the flow before spending.</p>
-          <ul class="bullet-list">
-            <li>Try the workspace and demo generator</li>
-            <li>See how copy and scripts are produced</li>
-            <li>No card required</li>
-          </ul>
-          <div class="pay-row">
-            <a class="btn btn-ghost" href="#contact">Start Free</a>
-          </div>
-        </article>
-
-        <article class="price-card is-recommended">
-          <span class="badge badge-recommended">Recommended</span>
-          <h3>Starter Monthly</h3>
-          <p class="price">$20</p>
-          <p>Best low-risk option for most new customers.</p>
-          <ul class="bullet-list">
-            <li>Full app access for one business profile</li>
-            <li>Generate offer, follow-up, and call script</li>
-            <li>Save and export your assets</li>
-          </ul>
-          <div class="pay-row">
-            <a class="btn btn-primary js-pay" data-plan="starter20" href="#">Subscribe $20/mo</a>
-          </div>
-        </article>
-
-        <article class="price-card">
-          <span class="badge">Pro</span>
-          <h3>Pro Monthly</h3>
-          <p class="price">$200</p>
-          <p>For teams that want more guided support and rollout speed.</p>
-          <ul class="bullet-list">
-            <li>Everything in Starter Monthly</li>
-            <li>Priority onboarding support</li>
-            <li>Faster setup guidance</li>
-          </ul>
-          <div class="pay-row">
-            <a class="btn btn-primary js-pay" data-plan="pro200" href="#">Subscribe $200/mo</a>
-          </div>
-        </article>
-      </div>
-      <p class="pay-note">Both paid options are recurring monthly subscriptions. Customers can cancel in the Stripe portal.</p>
-      <p class="legal-note">
-        By purchasing paid plans, you agree to our
-        <a href="terms.html">Terms of Service</a>,
-        <a href="privacy.html">Privacy Policy</a>,
-        <a href="refund.html">Refund Policy</a>,
-        and <a href="disclaimer.html">Earnings Disclaimer</a>.
+        Keep the homepage clean. Plans, checkout, and billing details now live in one dedicated page.
       </p>
       <div class="feature">
-        <h3>What Happens After Payment</h3>
+        <h3>Plans + Checkout</h3>
         <ul class="bullet-list">
-          <li>Free plan: submit contact form and get started with preview access.</li>
-          <li>$20 or $200 plan: subscribe monthly using checkout.</li>
-          <li>Access the product at <code>plutar.net/app.html</code>.</li>
-          <li>Generate offer copy, follow-up sequences, and call scripts inside the software.</li>
+          <li>Free Preview for testing</li>
+          <li>$20/mo Starter (recommended)</li>
+          <li>$200/mo Pro</li>
+          <li>Billing handled securely by Stripe</li>
         </ul>
-        <a href="app.html" class="btn btn-primary">Go To Plutar App</a>
+        <a href="pricing.html" class="btn btn-primary">Open Prices</a>
       </div>
-      <p id="paymentAlert" class="alert" role="alert"></p>
+      <p class="pay-note">Booking calls are unlocked only for paid members inside the app.</p>
     </section>
 
     <section id="contact" class="section panel">
-      <h2>Launch Plutar</h2>
+      <h2>Account Intake</h2>
       <p class="sub">
-        Use this form for a custom setup request or to prepare onboarding details after payment.
+        Structured intake only. Use this for free preview setup, paid account activation, or support.
       </p>
       <div class="form-wrap">
         <form class="contact-form" action="https://formspree.io/f/mkovqlaj" method="POST">
           <input type="text" name="name" placeholder="Your name" required>
           <input type="email" name="email" placeholder="Best email" required>
+          <input type="email" name="payment_email" placeholder="Stripe payment email (if paid)">
           <input type="text" name="business" placeholder="Business / project name" required>
           <select name="plan" required>
             <option value="" selected disabled>Select plan</option>
             <option value="free">Free Preview</option>
             <option value="starter20">$20 Starter Monthly</option>
             <option value="pro200">$200 Pro Monthly</option>
-            <option value="custom">Custom</option>
           </select>
-          <textarea name="notes" placeholder="What result do you want this system to produce?" required></textarea>
+          <select name="request_type" required>
+            <option value="" selected disabled>Select request type</option>
+            <option value="activation">Activate my account</option>
+            <option value="billing">Billing or payment issue</option>
+            <option value="technical">Technical support</option>
+            <option value="free_preview">Free preview setup</option>
+          </select>
+          <textarea name="notes" placeholder="Short details (optional)"></textarea>
           <label class="consent-row">
             <input type="checkbox" name="legal_consent" value="accepted" required>
             <span>
@@ -277,14 +233,14 @@
               <a href="disclaimer.html" target="_blank" rel="noopener">Earnings Disclaimer</a>.
             </span>
           </label>
-          <button class="btn btn-primary" type="submit">Send Request</button>
+          <button class="btn btn-primary" type="submit">Submit Intake</button>
         </form>
         <div class="help">
-          <p><strong>What You Get:</strong> Dedicated setup based on your business goals and offer.</p>
-          <p><strong>Onboarding:</strong> We map your niche, messaging, and lead flow before launch.</p>
-          <p><strong>Support:</strong> Ongoing optimization and direct help during your growth phase.</p>
+          <p><strong>Fast Triage:</strong> Structured requests are easier to process and resolve quickly.</p>
+          <p><strong>Activation:</strong> Paid members receive access instructions after payment verification.</p>
+          <p><strong>Support Scope:</strong> Billing, account access, and technical issues are prioritized.</p>
           <p><strong>Response Time:</strong> Most client messages are answered within 1 business day.</p>
-          <p><strong>Best Next Step:</strong> Pick a package or book a call for a custom rollout plan.</p>
+          <p><strong>Next Step:</strong> Choose a plan on the prices page, then submit this intake form.</p>
         </div>
       </div>
     </section>

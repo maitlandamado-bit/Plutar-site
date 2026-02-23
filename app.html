@@ -18,23 +18,31 @@
 <body>
   <div class="shell">
     <header class="panel topbar">
-      <div class="brand">
-        <img class="brand-mark" src="plutar-mark.svg" alt="Plutar logo">
-        <span>Plutar App</span>
-      </div>
-      <nav>
+      <nav class="nav-group nav-left">
         <a href="index.html">Home</a>
-        <a href="index.html#pricing">Pricing</a>
-        <a href="https://calendly.com/maitlandamado/30min" target="_blank" rel="noopener">Book Call</a>
+        <a href="pricing.html">Prices</a>
+        <a href="get-started.html#flow">How It Works</a>
+      </nav>
+      <a class="brand brand-center" href="index.html">
+        <img class="brand-mark" src="plutar-mark.svg" alt="Plutar logo">
+        <span>Plutar</span>
+      </a>
+      <nav class="nav-group nav-right">
+        <a href="get-started.html">Get Started</a>
+        <a href="login.html">Login</a>
+        <a id="memberBookingLink" class="booking-link locked" href="#">Member Booking (Paid)</a>
       </nav>
     </header>
 
     <main class="grid">
       <section id="accessCard" class="panel card">
         <p class="eyebrow">Access Portal</p>
-        <h1>Use The Software You Paid For</h1>
+        <h1>Use The Product You Paid For</h1>
         <p class="sub">
           Owner has free access. Paid customers use an access code sent after payment verification.
+        </p>
+        <p class="sub">
+          Booking calls unlock only after paid member access is active.
         </p>
 
         <div class="tabs" role="tablist" aria-label="Access type">
@@ -71,7 +79,7 @@
         <div class="checklist">
           <h2>How Customer Access Works</h2>
           <ol>
-            <li>Customer pays from the pricing page.</li>
+            <li>Customer pays from the prices page.</li>
             <li>You verify payment in Stripe dashboard.</li>
             <li>You send one access code manually.</li>
             <li>Customer logs in here and starts using tools.</li>

@@ -17,6 +17,7 @@ const CONFIG = {
 const SESSION_KEY = "plutar_app_session";
 const WORKSPACE_KEY = "plutar_workspace";
 const PROFILE_STORE_KEY = "plutar_profile_store";
+const MEMBER_BOOKING_URL = "https://calendly.com/maitlandamado/30min";
 
 const ownerTab = document.getElementById("ownerTab");
 const customerTab = document.getElementById("customerTab");
@@ -27,6 +28,7 @@ const appMessage = document.getElementById("appMessage");
 const appPanel = document.getElementById("appPanel");
 const accessCard = document.getElementById("accessCard");
 const userTag = document.getElementById("userTag");
+const memberBookingLink = document.getElementById("memberBookingLink");
 
 const businessNameInput = document.getElementById("businessName");
 const nicheInput = document.getElementById("niche");
@@ -389,6 +391,33 @@ function setAppMessage(text, type = "info") {
   appMessage.style.background = "";
 }
 
+function sessionHasBookingAccess(session) {
+  if (!session) return false;
+  if (session.role === "owner") return true;
+  return ["starter", "growth", "scale"].includes(String(session.plan || "").toLowerCase());
+}
+
+function updateMemberBookingLink(session) {
+  if (!memberBookingLink) return;
+
+  if (sessionHasBookingAccess(session)) {
+    memberBookingLink.href = MEMBER_BOOKING_URL;
+    memberBookingLink.target = "_blank";
+    memberBookingLink.rel = "noopener";
+    memberBookingLink.classList.remove("locked");
+    memberBookingLink.textContent = "Book Member Call";
+    memberBookingLink.removeAttribute("aria-disabled");
+    return;
+  }
+
+  memberBookingLink.href = "#";
+  memberBookingLink.removeAttribute("target");
+  memberBookingLink.removeAttribute("rel");
+  memberBookingLink.classList.add("locked");
+  memberBookingLink.textContent = "Member Booking (Paid)";
+  memberBookingLink.setAttribute("aria-disabled", "true");
+}
+
 function toggleTabs(type) {
   const ownerActive = type === "owner";
   ownerTab.classList.toggle("active", ownerActive);
@@ -428,6 +457,7 @@ function showWorkspace(session) {
   activeSession = session;
   accessCard.classList.add("hidden");
   appPanel.classList.remove("hidden");
+  updateMemberBookingLink(session);
   setActiveProfile(loadProfileForEmail(session.email));
   hydrateWorkspace();
   if (session.role === "owner" && CONFIG.ownerKey === "CHANGE_THIS_OWNER_KEY_NOW") {
@@ -442,6 +472,7 @@ function showAccessCard() {
   setActiveProfile(DEFAULT_PROFILE);
   appPanel.classList.add("hidden");
   accessCard.classList.remove("hidden");
+  updateMemberBookingLink(null);
 }
 
 function buildOfferCopy(data) {
@@ -879,6 +910,18 @@ saveProfileBtn.addEventListener("click", () => {
 resetProfileBtn.addEventListener("click", () => {
   resetProfile();
 });
+
+if (memberBookingLink) {
+  memberBookingLink.addEventListener("click", (event) => {
+    if (sessionHasBookingAccess(activeSession)) return;
+    event.preventDefault();
+    if (activeSession) {
+      setAppMessage("Booking calls are only for paid members.", "error");
+      return;
+    }
+    setAccessMessage("Booking calls are only for paid members. Sign in with a paid access code first.", "error");
+  });
+}
 
 logoutBtn.addEventListener("click", () => {
   clearSession();

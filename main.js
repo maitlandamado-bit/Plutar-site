@@ -22,8 +22,12 @@ document.querySelectorAll(".js-pay").forEach((button) => {
 
   button.addEventListener("click", (event) => {
     event.preventDefault();
-    alertBox.style.display = "block";
-    alertBox.textContent = "Checkout link not configured yet. Update CHECKOUT_LINKS in main.js for the $20 and $200 monthly plans.";
+    if (alertBox) {
+      alertBox.style.display = "block";
+      alertBox.textContent = "Checkout link not configured yet. Update CHECKOUT_LINKS in main.js for the $20 and $200 monthly plans.";
+      return;
+    }
+    window.alert("Checkout link not configured yet.");
   });
 });
 
