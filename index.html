@@ -230,6 +230,13 @@
         </article>
       </div>
       <p class="pay-note">Tip: use a single hosted checkout link per plan. Buyers will see only the payment methods your checkout provider enables for them.</p>
+      <p class="legal-note">
+        By purchasing, you agree to our
+        <a href="terms.html">Terms of Service</a>,
+        <a href="privacy.html">Privacy Policy</a>,
+        <a href="refund.html">Refund Policy</a>,
+        and <a href="disclaimer.html">Earnings Disclaimer</a>.
+      </p>
       <div class="feature">
         <h3>What Happens After Payment</h3>
         <ul class="bullet-list">
@@ -257,25 +264,39 @@
             <option value="" selected disabled>Select plan</option>
             <option value="starter">Starter</option>
             <option value="growth">Growth</option>
-            <option value="scale">Scale</option>
-            <option value="custom">Custom</option>
-          </select>
-          <textarea name="notes" placeholder="What result do you want this system to produce?" required></textarea>
+          <option value="scale">Scale</option>
+          <option value="custom">Custom</option>
+        </select>
+        <textarea name="notes" placeholder="What result do you want this system to produce?" required></textarea>
+          <label class="consent-row">
+            <input type="checkbox" name="legal_consent" value="accepted" required>
+            <span>
+              I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms</a>,
+              <a href="refund.html" target="_blank" rel="noopener">Refund Policy</a>,
+              <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>, and
+              <a href="disclaimer.html" target="_blank" rel="noopener">Earnings Disclaimer</a>.
+            </span>
+          </label>
           <button class="btn btn-primary" type="submit">Send Request</button>
         </form>
         <div class="help">
-          <p><strong>Domain:</strong> <code>plutar.net</code></p>
-          <p><strong>Deploy:</strong> Upload this project to your live server public folder and point DNS A record to server IP.</p>
-          <p><strong>Payments:</strong> Checkout links are configured in <code>main.js</code>.</p>
-          <p><strong>Software:</strong> App access is at <code>app.html</code>.</p>
-          <p><strong>Booking:</strong> Replace the Calendly URL in the top button.</p>
-          <p><strong>Form Intake:</strong> Form endpoint is connected through Formspree.</p>
+          <p><strong>What You Get:</strong> Dedicated setup based on your business goals and offer.</p>
+          <p><strong>Onboarding:</strong> We map your niche, messaging, and lead flow before launch.</p>
+          <p><strong>Support:</strong> Ongoing optimization and direct help during your growth phase.</p>
+          <p><strong>Response Time:</strong> Most client messages are answered within 1 business day.</p>
+          <p><strong>Best Next Step:</strong> Pick a package or book a call for a custom rollout plan.</p>
         </div>
       </div>
     </section>
 
     <footer>
-      &copy; <span id="year"></span> Plutar. Built for independent growth systems.
+      <p>&copy; <span id="year"></span> Plutar. Built for independent growth systems.</p>
+      <p class="footer-links">
+        <a href="terms.html">Terms</a>
+        <a href="refund.html">Refund</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </p>
     </footer>
   </div>
 

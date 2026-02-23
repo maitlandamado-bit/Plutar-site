@@ -238,6 +238,22 @@ h3 {
   line-height: 1.5;
 }
 
+.legal-mini {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.legal-mini a {
+  color: var(--accent-2);
+  text-decoration: none;
+}
+
+.legal-mini a:hover {
+  text-decoration: underline;
+}
+
 .hidden {
   display: none;
 }
@@ -411,6 +427,26 @@ h3 {
 
 .output textarea::placeholder {
   color: var(--muted);
+}
+
+.app-legal {
+  margin-top: 14px;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+  gap: 12px;
+}
+
+.app-legal a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+
+.app-legal a:hover {
+  color: var(--accent-2);
+  text-decoration: underline;
 }
 
 @media (max-width: 860px) {
