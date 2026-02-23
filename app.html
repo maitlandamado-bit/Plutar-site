@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plutar App | Revenue Engine</title>
+  <meta name="description" content="Plutar App helps service businesses generate offers, follow-up sequences, and call scripts after onboarding.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="panel topbar">
+      <div class="brand">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>Plutar App</span>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="https://calendly.com/maitlandamado/30min" target="_blank" rel="noopener">Book Call</a>
+      </nav>
+    </header>
+
+    <main class="grid">
+      <section id="accessCard" class="panel card">
+        <p class="eyebrow">Access Portal</p>
+        <h1>Use The Software You Paid For</h1>
+        <p class="sub">
+          Owner has free access. Paid customers use an access code sent after payment verification.
+        </p>
+
+        <div class="tabs" role="tablist" aria-label="Access type">
+          <button id="ownerTab" class="tab active" type="button">Owner Access</button>
+          <button id="customerTab" class="tab" type="button">Customer Access</button>
+        </div>
+
+        <form id="ownerForm" class="form" autocomplete="on">
+          <label>
+            Owner Email
+            <input id="ownerEmail" name="ownerEmail" type="email" placeholder="owner@example.com" required>
+          </label>
+          <label>
+            Owner Key
+            <input id="ownerKey" name="ownerKey" type="password" placeholder="Private owner key" required>
+          </label>
+          <button class="btn btn-primary" type="submit">Enter Owner Mode</button>
+        </form>
+
+        <form id="customerForm" class="form hidden" autocomplete="on">
+          <label>
+            Customer Email
+            <input id="customerEmail" name="customerEmail" type="email" placeholder="you@business.com" required>
+          </label>
+          <label>
+            Access Code
+            <input id="accessCode" name="accessCode" type="text" placeholder="PLUTAR-STARTER-001" required>
+          </label>
+          <button class="btn btn-primary" type="submit">Unlock Product</button>
+        </form>
+
+        <p id="accessMessage" class="notice" role="status" aria-live="polite"></p>
+
+        <div class="checklist">
+          <h2>How Customer Access Works</h2>
+          <ol>
+            <li>Customer pays from the pricing page.</li>
+            <li>You verify payment in Stripe dashboard.</li>
+            <li>You send one access code manually.</li>
+            <li>Customer logs in here and starts using tools.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="appPanel" class="panel card hidden">
+        <div class="app-header">
+          <div>
+            <p class="eyebrow">Workspace</p>
+            <h2>Plutar Revenue Engine</h2>
+          </div>
+          <div class="session">
+            <span id="userTag" class="tag"></span>
+            <button id="logoutBtn" class="btn btn-ghost" type="button">Log Out</button>
+          </div>
+        </div>
+
+        <form id="workspaceForm" class="form two-col">
+          <label>
+            Business Name
+            <input id="businessName" type="text" placeholder="Example: Northline Roofing" required>
+          </label>
+          <label>
+            Niche
+            <input id="niche" type="text" placeholder="Example: Roofing contractor" required>
+          </label>
+          <label>
+            Core Offer
+            <input id="offer" type="text" placeholder="Example: Roof inspection + quote within 24h" required>
+          </label>
+          <label>
+            Average Ticket ($)
+            <input id="ticket" type="number" min="1" step="1" placeholder="1500" required>
+          </label>
+          <label>
+            Main Goal
+            <input id="goal" type="text" placeholder="Get 15 qualified leads per month" required>
+          </label>
+          <label>
+            Primary Channel
+            <select id="channel" required>
+              <option value="" selected disabled>Select channel</option>
+              <option value="sms">SMS</option>
+              <option value="email">Email</option>
+              <option value="instagram">Instagram DM</option>
+              <option value="facebook">Facebook DM</option>
+              <option value="linkedin">LinkedIn DM</option>
+            </select>
+          </label>
+        </form>
+
+        <div class="actions">
+          <button id="generateBtn" class="btn btn-primary" type="button">Generate Assets</button>
+          <button id="saveBtn" class="btn btn-ghost" type="button">Save Workspace</button>
+          <button id="exportBtn" class="btn btn-ghost" type="button">Export Text File</button>
+        </div>
+
+        <div class="outputs">
+          <article class="output">
+            <h3>Offer Positioning Copy</h3>
+            <textarea id="offerOutput" readonly placeholder="Generated offer copy appears here."></textarea>
+          </article>
+          <article class="output">
+            <h3>7-Day Follow-Up Sequence</h3>
+            <textarea id="followupOutput" readonly placeholder="Generated sequence appears here."></textarea>
+          </article>
+          <article class="output">
+            <h3>Discovery Call Script</h3>
+            <textarea id="callOutput" readonly placeholder="Generated call script appears here."></textarea>
+          </article>
+        </div>
+
+        <p id="appMessage" class="notice" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
