@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plutar App | Revenue Engine</title>
   <meta name="description" content="Plutar App helps service businesses generate offers, follow-up sequences, and call scripts after onboarding.">
+  <meta name="theme-color" content="#061126">
+  <link rel="icon" type="image/svg+xml" href="plutar-mark.svg?v=3">
+  <link rel="shortcut icon" href="plutar-mark.svg?v=3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
@@ -14,7 +17,7 @@
   <div class="shell">
     <header class="panel topbar">
       <div class="brand">
-        <span class="brand-dot" aria-hidden="true"></span>
+        <img class="brand-mark" src="plutar-mark.svg" alt="Plutar logo">
         <span>Plutar App</span>
       </div>
       <nav>
@@ -86,6 +89,60 @@
           </div>
         </div>
 
+        <p class="mini-guide">
+          Fill the six inputs with your business details, then click <strong>Generate Assets</strong>.
+          Use <strong>Try Demo Inputs</strong> if you want a quick example.
+        </p>
+
+        <section class="profile-panel">
+          <div class="profile-head">
+            <h3>Profile & Preferences</h3>
+            <p id="profileGreeting" class="profile-greeting">Welcome to your workspace.</p>
+          </div>
+
+          <form id="profileForm" class="form profile-grid">
+            <label>
+              Display Name
+              <input id="profileName" type="text" placeholder="Example: Aries">
+            </label>
+            <label>
+              Role / Title
+              <input id="profileTitle" type="text" placeholder="Example: Founder">
+            </label>
+            <label>
+              Writing Tone
+              <select id="profileTone">
+                <option value="strategic" selected>Strategic</option>
+                <option value="friendly">Friendly</option>
+                <option value="direct">Direct</option>
+              </select>
+            </label>
+            <label>
+              Interface Theme
+              <select id="profileTheme">
+                <option value="aqua" selected>Aqua</option>
+                <option value="mint">Mint</option>
+                <option value="sunset">Sunset</option>
+              </select>
+            </label>
+          </form>
+
+          <div class="profile-actions">
+            <button id="saveProfileBtn" class="btn btn-ghost" type="button">Save Profile</button>
+            <button id="resetProfileBtn" class="btn btn-ghost" type="button">Reset Profile</button>
+          </div>
+        </section>
+
+        <div class="ai-toggle">
+          <label>
+            <input id="aiMode" type="checkbox" checked>
+            AI Pro Mode (Secure Backend)
+          </label>
+          <p class="ai-note">
+            Uses server-side AI for smarter outputs. If unavailable, app falls back to built-in generation.
+          </p>
+        </div>
+
         <form id="workspaceForm" class="form two-col">
           <label>
             Business Name
@@ -121,10 +178,13 @@
         </form>
 
         <div class="actions">
+          <button id="demoBtn" class="btn btn-ghost" type="button">Try Demo Inputs</button>
           <button id="generateBtn" class="btn btn-primary" type="button">Generate Assets</button>
           <button id="saveBtn" class="btn btn-ghost" type="button">Save Workspace</button>
           <button id="exportBtn" class="btn btn-ghost" type="button">Export Text File</button>
         </div>
+
+        <p id="loadingState" class="loading-state" aria-live="polite">AI is thinking...</p>
 
         <div class="outputs">
           <article class="output">

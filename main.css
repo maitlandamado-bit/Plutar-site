@@ -91,12 +91,12 @@
       gap: 10px;
     }
 
-    .brand-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 12px var(--accent);
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(54, 231, 255, 0.34));
     }
 
     nav {
