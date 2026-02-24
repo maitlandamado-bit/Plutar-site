@@ -36,7 +36,7 @@
         {
           "@type": "ContactPoint",
           "contactType": "sales",
-          "url": "https://www.plutar.net/#contact"
+          "url": "https://www.plutar.net/get-started.html"
         }
       ]
     }
@@ -120,28 +120,54 @@
           You keep ownership of your stack on your own live server and avoid marketplace fee drag.
         </p>
         <div class="hero-actions">
-          <a href="get-started.html" class="btn btn-primary">Get Started</a>
+          <a href="get-started.html" class="btn btn-primary">Open Setup</a>
           <a href="pricing.html" class="btn btn-ghost">View Prices</a>
           <a href="login.html" class="btn btn-ghost">Login</a>
         </div>
       </div>
-      <div class="metrics">
-        <article class="metric">
-          <strong>&lt; 7 Days</strong>
-          <span>Typical deployment from kickoff to live automations.</span>
-        </article>
-        <article class="metric">
-          <strong>24/7</strong>
-          <span>AI handles inbound FAQs, follow-ups, and booking prompts.</span>
-        </article>
-        <article class="metric">
-          <strong>3 Channels</strong>
-          <span>Email, SMS, and site chat orchestrated in one workflow.</span>
-        </article>
-        <article class="metric">
-          <strong>0 Shopify Tax</strong>
-          <span>Use your own infrastructure and keep margins cleaner.</span>
-        </article>
+      <div class="hero-side">
+        <div class="hero-cube-stage" aria-hidden="true">
+          <div class="hero-cube-glow"></div>
+          <div class="hero-cube-orbit hero-cube-orbit-a"></div>
+          <div class="hero-cube-orbit hero-cube-orbit-b"></div>
+          <div class="hero-cube">
+            <span class="cube-face cube-face-front"></span>
+            <span class="cube-face cube-face-back"></span>
+            <span class="cube-face cube-face-right"></span>
+            <span class="cube-face cube-face-left"></span>
+            <span class="cube-face cube-face-top"></span>
+            <span class="cube-face cube-face-bottom"></span>
+          </div>
+          <p class="hero-cube-label">Plutar Engine</p>
+        </div>
+        <div class="metrics">
+          <article class="metric">
+            <strong>&lt; 7 Days</strong>
+            <span>Typical deployment from kickoff to live automations.</span>
+          </article>
+          <article class="metric">
+            <strong>24/7</strong>
+            <span>AI handles inbound FAQs, follow-ups, and booking prompts.</span>
+          </article>
+          <article class="metric">
+            <strong>3 Channels</strong>
+            <span>Email, SMS, and site chat orchestrated in one workflow.</span>
+          </article>
+          <article class="metric">
+            <strong>0 Shopify Tax</strong>
+            <span>Use your own infrastructure and keep margins cleaner.</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-strip panel" aria-label="Trust signals">
+      <p class="trust-title">Trusted Setup Standards</p>
+      <div class="trust-badges">
+        <span class="trust-pill">Secure checkout via Stripe</span>
+        <span class="trust-pill">Terms + privacy + refund policies live</span>
+        <span class="trust-pill">Business-day support response target</span>
+        <span class="trust-pill">Runs on your own domain</span>
       </div>
     </section>
 
@@ -181,67 +207,97 @@
       </div>
     </section>
 
-    <section class="section panel">
-      <h2>Prices Are On Their Own Page</h2>
+    <section id="proof" class="section panel">
+      <h2>Social Proof Buyers Actually Care About</h2>
       <p class="sub">
-        Keep the homepage clean. Plans, checkout, and billing details now live in one dedicated page.
+        The best signal is operational clarity: buyers can see exactly how they buy, onboard, and use the product.
       </p>
-      <div class="feature">
-        <h3>Plans + Checkout</h3>
-        <ul class="bullet-list">
-          <li>Free Preview for testing</li>
-          <li>$20/mo Starter (recommended)</li>
-          <li>$200/mo Pro</li>
-          <li>Billing handled securely by Stripe</li>
-        </ul>
-        <a href="pricing.html" class="btn btn-primary">Open Prices</a>
+      <div class="proof-grid">
+        <article class="proof-card">
+          <p class="proof-kicker">Clarity</p>
+          <h3>Dedicated pricing page</h3>
+          <p>Visitors see package options and billing terms before checkout, which reduces hesitation.</p>
+        </article>
+        <article class="proof-card">
+          <p class="proof-kicker">Trust</p>
+          <h3>Public legal pages</h3>
+          <p>Terms, privacy, refund, and disclaimer pages are visible to protect both sides.</p>
+        </article>
+        <article class="proof-card">
+          <p class="proof-kicker">Control</p>
+          <h3>Owner-first infrastructure</h3>
+          <p>You operate on your own domain and stack, instead of renting everything from a marketplace.</p>
+        </article>
       </div>
-      <p class="pay-note">Booking calls are unlocked only for paid members inside the app.</p>
+      <div class="industry-row" aria-label="Built for service niches">
+        <span class="industry-tag">Home Services</span>
+        <span class="industry-tag">Local Agencies</span>
+        <span class="industry-tag">Automotive Detailing</span>
+        <span class="industry-tag">Beauty + MedSpa</span>
+        <span class="industry-tag">Coaching Offers</span>
+      </div>
     </section>
 
-    <section id="contact" class="section panel">
-      <h2>Account Intake</h2>
+    <section id="flow" class="section panel cta-flow">
+      <h2>Strong CTA Flow From Click To Access</h2>
       <p class="sub">
-        Structured intake only. Use this for free preview setup, paid account activation, or support.
+        Keep conversion simple: one decision at a time, no confusion.
       </p>
-      <div class="form-wrap">
-        <form class="contact-form" action="https://formspree.io/f/mkovqlaj" method="POST">
-          <input type="text" name="name" placeholder="Your name" required>
-          <input type="email" name="email" placeholder="Best email" required>
-          <input type="email" name="payment_email" placeholder="Stripe payment email (if paid)">
-          <input type="text" name="business" placeholder="Business / project name" required>
-          <select name="plan" required>
-            <option value="" selected disabled>Select plan</option>
-            <option value="free">Free Preview</option>
-            <option value="starter20">$20 Starter Monthly</option>
-            <option value="pro200">$200 Pro Monthly</option>
-          </select>
-          <select name="request_type" required>
-            <option value="" selected disabled>Select request type</option>
-            <option value="activation">Activate my account</option>
-            <option value="billing">Billing or payment issue</option>
-            <option value="technical">Technical support</option>
-            <option value="free_preview">Free preview setup</option>
-          </select>
-          <textarea name="notes" placeholder="Short details (optional)"></textarea>
-          <label class="consent-row">
-            <input type="checkbox" name="legal_consent" value="accepted" required>
-            <span>
-              I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms</a>,
-              <a href="refund.html" target="_blank" rel="noopener">Refund Policy</a>,
-              <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>, and
-              <a href="disclaimer.html" target="_blank" rel="noopener">Earnings Disclaimer</a>.
-            </span>
-          </label>
-          <button class="btn btn-primary" type="submit">Submit Intake</button>
-        </form>
-        <div class="help">
-          <p><strong>Fast Triage:</strong> Structured requests are easier to process and resolve quickly.</p>
-          <p><strong>Activation:</strong> Paid members receive access instructions after payment verification.</p>
-          <p><strong>Support Scope:</strong> Billing, account access, and technical issues are prioritized.</p>
-          <p><strong>Response Time:</strong> Most client messages are answered within 1 business day.</p>
-          <p><strong>Next Step:</strong> Choose a plan on the prices page, then submit this intake form.</p>
-        </div>
+      <div class="flow-grid">
+        <article class="flow-step">
+          <span class="step-number">1</span>
+          <h3>Choose a plan</h3>
+          <p>Start free or pick a paid tier based on the speed and support you want.</p>
+          <a href="pricing.html" class="btn btn-ghost">Open Pricing</a>
+        </article>
+        <article class="flow-step">
+          <span class="step-number">2</span>
+          <h3>Create your account</h3>
+          <p>Follow the setup guide to create your member account and prepare your business profile.</p>
+          <a href="get-started.html" class="btn btn-ghost">Open Setup Guide</a>
+        </article>
+        <article class="flow-step">
+          <span class="step-number">3</span>
+          <h3>Login and run the engine</h3>
+          <p>Use your member login to access the workspace and generate your growth assets.</p>
+          <a href="login.html" class="btn btn-ghost">Go To Login</a>
+        </article>
+      </div>
+      <p class="pay-note">Booking calls are unlocked only for paid members inside the app.</p>
+      <div class="flow-actions">
+        <a href="get-started.html" class="btn btn-primary">Start Setup</a>
+        <a href="pricing.html" class="btn btn-ghost">Compare Plans</a>
+      </div>
+    </section>
+
+    <section id="faq" class="section panel faq-section">
+      <h2>FAQ Before You Buy</h2>
+      <p class="sub">Quick answers that remove friction before checkout.</p>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>Do I need to know coding to use Plutar?</summary>
+          <p>No. The workflow is form-based and guided. You can operate it without writing code.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens after payment?</summary>
+          <p>You get setup instructions, activate your member login, and then use the workspace to generate and run assets.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I start free and upgrade later?</summary>
+          <p>Yes. Use the free option to test the flow, then move to a paid plan when ready.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is booking available to everyone?</summary>
+          <p>No. Booking is reserved for paid members after their access is active.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How fast do I get a response on support?</summary>
+          <p>Most client messages are answered within one business day.</p>
+        </details>
+      </div>
+      <div class="flow-actions">
+        <a href="pricing.html" class="btn btn-primary">Choose Plan</a>
+        <a href="get-started.html" class="btn btn-ghost">See Onboarding Steps</a>
       </div>
     </section>
 
