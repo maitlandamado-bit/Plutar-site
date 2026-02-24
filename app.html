@@ -37,52 +37,34 @@
     <main class="grid">
       <section id="accessCard" class="panel card">
         <p class="eyebrow">Access Portal</p>
-        <h1>Use The Product You Paid For</h1>
+        <h1>Login With Email Verification</h1>
         <p class="sub">
-          Owner has free access. Paid customers use an access code sent after payment verification.
-        </p>
-        <p class="sub">
-          Booking calls unlock only after paid member access is active.
+          Enter your Gmail or business email. We send a 6-digit code to verify ownership.
+          After verification, paid accounts get automatic access based on Stripe status.
         </p>
 
-        <div class="tabs" role="tablist" aria-label="Access type">
-          <button id="ownerTab" class="tab active" type="button">Owner Access</button>
-          <button id="customerTab" class="tab" type="button">Customer Access</button>
-        </div>
-
-        <form id="ownerForm" class="form" autocomplete="on">
+        <form id="emailAuthForm" class="form" autocomplete="on">
           <label>
-            Owner Email
-            <input id="ownerEmail" name="ownerEmail" type="email" placeholder="owner@example.com" required>
+            Email
+            <input id="loginEmail" name="loginEmail" type="email" placeholder="you@gmail.com" required>
           </label>
+          <button id="sendCodeBtn" class="btn btn-ghost" type="button">Send Verification Code</button>
           <label>
-            Owner Key
-            <input id="ownerKey" name="ownerKey" type="password" placeholder="Private owner key" required>
+            Verification Code
+            <input id="loginCode" name="loginCode" type="text" inputmode="numeric" maxlength="6" placeholder="6-digit code" required>
           </label>
-          <button class="btn btn-primary" type="submit">Enter Owner Mode</button>
-        </form>
-
-        <form id="customerForm" class="form hidden" autocomplete="on">
-          <label>
-            Customer Email
-            <input id="customerEmail" name="customerEmail" type="email" placeholder="you@business.com" required>
-          </label>
-          <label>
-            Access Code
-            <input id="accessCode" name="accessCode" type="text" placeholder="PLUTAR-STARTER-001" required>
-          </label>
-          <button class="btn btn-primary" type="submit">Unlock Product</button>
+          <button id="verifyCodeBtn" class="btn btn-primary" type="submit">Verify & Continue</button>
         </form>
 
         <p id="accessMessage" class="notice" role="status" aria-live="polite"></p>
 
         <div class="checklist">
-          <h2>How Customer Access Works</h2>
+          <h2>How Access Works</h2>
           <ol>
-            <li>Customer pays from the prices page.</li>
-            <li>You verify payment in Stripe dashboard.</li>
-            <li>You send one access code manually.</li>
-            <li>Customer logs in here and starts using tools.</li>
+            <li>User pays from the prices page.</li>
+            <li>User verifies email with a 6-digit code.</li>
+            <li>System checks Stripe subscription automatically.</li>
+            <li>If paid, workspace unlocks immediately.</li>
           </ol>
         </div>
         <p class="legal-mini">

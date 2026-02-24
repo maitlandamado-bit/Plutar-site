@@ -1,28 +1,13 @@
-const CONFIG = {
-  ownerEmail: "amaitland@augusta.edu",
-  ownerKey: "PlutarOwner-2026!Launch#A9",
-  accessCodes: {
-    "PLUTAR-STARTER-001": "starter",
-    "PLUTAR-STARTER-002": "starter",
-    "PLUTAR-STARTER-003": "starter",
-    "PLUTAR-GROWTH-001": "growth",
-    "PLUTAR-GROWTH-002": "growth",
-    "PLUTAR-GROWTH-003": "growth",
-    "PLUTAR-SCALE-001": "scale",
-    "PLUTAR-SCALE-002": "scale",
-    "PLUTAR-SCALE-003": "scale"
-  }
-};
-
 const SESSION_KEY = "plutar_app_session";
 const WORKSPACE_KEY = "plutar_workspace";
 const PROFILE_STORE_KEY = "plutar_profile_store";
 const MEMBER_BOOKING_URL = "https://calendly.com/maitlandamado/30min";
 
-const ownerTab = document.getElementById("ownerTab");
-const customerTab = document.getElementById("customerTab");
-const ownerForm = document.getElementById("ownerForm");
-const customerForm = document.getElementById("customerForm");
+const emailAuthForm = document.getElementById("emailAuthForm");
+const loginEmailInput = document.getElementById("loginEmail");
+const loginCodeInput = document.getElementById("loginCode");
+const sendCodeBtn = document.getElementById("sendCodeBtn");
+const verifyCodeBtn = document.getElementById("verifyCodeBtn");
 const accessMessage = document.getElementById("accessMessage");
 const appMessage = document.getElementById("appMessage");
 const appPanel = document.getElementById("appPanel");
@@ -153,12 +138,12 @@ const PLAN_DELAY_PROFILE = {
     local: [1700, 3000],
     fallback: [1300, 2200]
   },
-  growth: {
+  pro: {
     ai: [1700, 3000],
     local: [1200, 2200],
     fallback: [900, 1600]
   },
-  scale: {
+  owner: {
     ai: [900, 1800],
     local: [700, 1400],
     fallback: [600, 1200]
@@ -219,6 +204,14 @@ let activeProfile = { ...DEFAULT_PROFILE };
 
 function normalize(value) {
   return String(value || "").trim().toLowerCase();
+}
+
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
+}
+
+function isValidCode(value) {
+  return /^\d{6}$/.test(String(value || "").trim());
 }
 
 function pick(list) {
@@ -394,7 +387,13 @@ function setAppMessage(text, type = "info") {
 function sessionHasBookingAccess(session) {
   if (!session) return false;
   if (session.role === "owner") return true;
-  return ["starter", "growth", "scale"].includes(String(session.plan || "").toLowerCase());
+  return Boolean(session.paid);
+}
+
+function sessionHasWorkspaceAccess(session) {
+  if (!session) return false;
+  if (session.role === "owner") return true;
+  return Boolean(session.paid);
 }
 
 function updateMemberBookingLink(session) {
@@ -418,19 +417,12 @@ function updateMemberBookingLink(session) {
   memberBookingLink.setAttribute("aria-disabled", "true");
 }
 
-function toggleTabs(type) {
-  const ownerActive = type === "owner";
-  ownerTab.classList.toggle("active", ownerActive);
-  customerTab.classList.toggle("active", !ownerActive);
-  ownerForm.classList.toggle("hidden", !ownerActive);
-  customerForm.classList.toggle("hidden", ownerActive);
-}
-
-function createSession(role, plan, email) {
+function createSession(payload) {
   const session = {
-    role,
-    plan,
-    email,
+    role: String(payload?.role || "member"),
+    plan: String(payload?.plan || "starter"),
+    paid: Boolean(payload?.paid),
+    email: normalize(payload?.email),
     signedAt: new Date().toISOString()
   };
   localStorage.setItem(SESSION_KEY, JSON.stringify(session));
@@ -443,6 +435,9 @@ function loadSession() {
   try {
     const parsed = JSON.parse(raw);
     if (!parsed || !parsed.plan || !parsed.email) return null;
+    if (typeof parsed.paid !== "boolean") {
+      parsed.paid = parsed.role === "owner";
+    }
     return parsed;
   } catch {
     return null;
@@ -460,11 +455,7 @@ function showWorkspace(session) {
   updateMemberBookingLink(session);
   setActiveProfile(loadProfileForEmail(session.email));
   hydrateWorkspace();
-  if (session.role === "owner" && CONFIG.ownerKey === "CHANGE_THIS_OWNER_KEY_NOW") {
-    setAppMessage("Owner key is still default in app.js. Change CONFIG.ownerKey before sharing widely.", "error");
-  } else {
-    setAppMessage("Workspace unlocked. Generate and export assets for your client.", "success");
-  }
+  setAppMessage("Workspace unlocked. Generate and export assets for your client.", "success");
 }
 
 function showAccessCard() {
@@ -473,6 +464,45 @@ function showAccessCard() {
   appPanel.classList.add("hidden");
   accessCard.classList.remove("hidden");
   updateMemberBookingLink(null);
+}
+
+function setAuthBusy(isBusy, label = "Verifying...") {
+  [sendCodeBtn, verifyCodeBtn, logoutBtn].forEach((button) => {
+    if (!button) return;
+    button.disabled = isBusy;
+  });
+  if (verifyCodeBtn) {
+    verifyCodeBtn.textContent = isBusy ? label : "Verify & Continue";
+  }
+}
+
+async function postJSON(url, payload) {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload || {})
+  });
+
+  let data = {};
+  try {
+    data = await response.json();
+  } catch {
+    data = {};
+  }
+
+  if (!response.ok) {
+    const details = data?.error || `Request failed (${response.status})`;
+    throw new Error(details);
+  }
+  return data;
+}
+
+async function requestLoginCode(email) {
+  return postJSON("/api/send-login-code", { email });
+}
+
+async function verifyLogin(email, code) {
+  return postJSON("/api/verify-login-code", { email, code });
 }
 
 function buildOfferCopy(data) {
@@ -726,8 +756,11 @@ function randomInt(min, max) {
 }
 
 function getActivePlan() {
-  const plan = activeSession?.plan;
-  if (plan && PLAN_DELAY_PROFILE[plan]) return plan;
+  const rawPlan = String(activeSession?.plan || "").toLowerCase();
+  if (rawPlan === "owner") return "owner";
+  if (rawPlan === "pro") return "pro";
+  if (rawPlan === "starter") return "starter";
+  if (PLAN_DELAY_PROFILE[rawPlan]) return rawPlan;
   return "starter";
 }
 
@@ -803,38 +836,63 @@ function resetProfile() {
   setAppMessage("Profile reset to default settings.", "success");
 }
 
-ownerTab.addEventListener("click", () => toggleTabs("owner"));
-customerTab.addEventListener("click", () => toggleTabs("customer"));
-
-ownerForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const email = normalize(document.getElementById("ownerEmail").value);
-  const key = document.getElementById("ownerKey").value;
-
-  if (email !== normalize(CONFIG.ownerEmail) || key !== CONFIG.ownerKey) {
-    setAccessMessage("Owner credentials are invalid.", "error");
+sendCodeBtn.addEventListener("click", async () => {
+  const email = normalize(loginEmailInput?.value);
+  if (!isValidEmail(email)) {
+    setAccessMessage("Enter a valid email address first.", "error");
     return;
   }
 
-  const session = createSession("owner", "scale", email);
-  setAccessMessage("Owner access granted.", "success");
-  showWorkspace(session);
+  setAuthBusy(true, "Sending...");
+  try {
+    await requestLoginCode(email);
+    setAccessMessage("Verification code sent. Check your inbox and spam folder.", "success");
+  } catch (error) {
+    setAccessMessage(error.message || "Could not send verification code.", "error");
+  } finally {
+    setAuthBusy(false);
+  }
 });
 
-customerForm.addEventListener("submit", (event) => {
+emailAuthForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const email = normalize(document.getElementById("customerEmail").value);
-  const code = document.getElementById("accessCode").value.trim().toUpperCase();
-  const plan = CONFIG.accessCodes[code];
 
-  if (!plan) {
-    setAccessMessage("Access code not recognized. Contact Plutar support.", "error");
+  const email = normalize(loginEmailInput?.value);
+  const code = String(loginCodeInput?.value || "").trim();
+
+  if (!isValidEmail(email)) {
+    setAccessMessage("Enter a valid email address.", "error");
+    return;
+  }
+  if (!isValidCode(code)) {
+    setAccessMessage("Enter the 6-digit verification code.", "error");
     return;
   }
 
-  const session = createSession("customer", plan, email);
-  setAccessMessage(`Access granted for ${plan.toUpperCase()} plan.`, "success");
-  showWorkspace(session);
+  setAuthBusy(true);
+  try {
+    const result = await verifyLogin(email, code);
+    if (!result?.accessGranted) {
+      setAccessMessage(
+        "No active paid subscription found for this email. Complete checkout first, then login again.",
+        "error"
+      );
+      return;
+    }
+
+    const role = result.role === "owner" ? "owner" : "member";
+    const plan = role === "owner"
+      ? "owner"
+      : (String(result.plan || "starter").toLowerCase() === "pro" ? "pro" : "starter");
+    const paid = Boolean(result.paid || role === "owner");
+    const session = createSession({ role, plan, paid, email });
+    setAccessMessage(`Login verified. Access granted for ${plan.toUpperCase()} plan.`, "success");
+    showWorkspace(session);
+  } catch (error) {
+    setAccessMessage(error.message || "Verification failed. Try again.", "error");
+  } finally {
+    setAuthBusy(false);
+  }
 });
 
 generateBtn.addEventListener("click", async () => {
@@ -919,7 +977,7 @@ if (memberBookingLink) {
       setAppMessage("Booking calls are only for paid members.", "error");
       return;
     }
-    setAccessMessage("Booking calls are only for paid members. Sign in with a paid access code first.", "error");
+    setAccessMessage("Booking calls are only for paid members. Login with verified email after payment.", "error");
   });
 }
 
@@ -930,8 +988,9 @@ logoutBtn.addEventListener("click", () => {
 });
 
 const existingSession = loadSession();
-if (existingSession) {
+if (sessionHasWorkspaceAccess(existingSession)) {
   showWorkspace(existingSession);
 } else {
+  clearSession();
   showAccessCard();
 }
