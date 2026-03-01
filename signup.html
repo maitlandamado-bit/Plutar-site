@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | Plutar</title>
+  <meta name="description" content="Sign up with Gmail or Google account access, then login to use your Plutar workspace.">
+  <meta name="robots" content="noindex,follow">
+  <meta name="theme-color" content="#061126">
+  <link rel="icon" type="image/svg+xml" href="plutar-mark.svg?v=3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+  <style>
+    .auth-wrap {
+      max-width: 980px;
+      margin: 32px auto 24px;
+      padding: 0 4px;
+    }
+    .auth-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 14px;
+    }
+    .auth-card {
+      padding: 26px;
+      border-radius: 20px;
+      border: 1px solid rgba(179, 220, 255, 0.24);
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .auth-card h1,
+    .auth-card h2 {
+      margin-bottom: 8px;
+      font-size: clamp(1.4rem, 3.2vw, 1.9rem);
+    }
+    .auth-card p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .auth-form {
+      display: grid;
+      gap: 12px;
+    }
+    .auth-form label {
+      display: grid;
+      gap: 6px;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+    .auth-form input {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(179, 220, 255, 0.27);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      padding: 11px 12px;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    .auth-form input:focus {
+      outline: 2px solid rgba(54, 231, 255, 0.5);
+      outline-offset: 0;
+    }
+    .mini-note {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+    .google-box {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+    .google-host {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+    }
+    .message {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(179, 220, 255, 0.28);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      display: none;
+    }
+    .message.is-error {
+      border-color: rgba(255, 127, 143, 0.36);
+      background: rgba(255, 127, 143, 0.1);
+      color: #ffd0d7;
+    }
+    .message.is-success {
+      border-color: rgba(140, 255, 198, 0.42);
+      background: rgba(140, 255, 198, 0.1);
+      color: #d8ffe9;
+    }
+    .steps {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin-top: 4px;
+      margin-bottom: 0;
+    }
+    .steps li {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .steps strong {
+      color: var(--text);
+    }
+    @media (max-width: 860px) {
+      .auth-grid {
+        grid-template-columns: 1fr;
+      }
+      .auth-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="panel site-header">
+      <nav class="nav-group nav-left">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Prices</a>
+        <a href="get-started.html#flow">How It Works</a>
+      </nav>
+      <a class="brand brand-center" href="index.html">
+        <img class="brand-mark" src="plutar-mark.svg" alt="Plutar logo">
+        <span>Plutar</span>
+      </a>
+      <nav class="nav-group nav-right">
+        <a href="login.html">Login</a>
+        <a class="btn btn-ghost" href="app.html">Open App</a>
+      </nav>
+    </header>
+
+    <section class="panel auth-wrap">
+      <div class="auth-grid">
+        <article class="auth-card">
+          <p class="eyebrow">Step 1 - Sign Up</p>
+          <h1>Sign up with Gmail</h1>
+          <p>Use your Gmail to start setup. After sign up, you will login with Gmail and use the software.</p>
+
+          <form id="signupForm" class="auth-form">
+            <label for="signupEmail">
+              Gmail Address
+              <input id="signupEmail" name="email" type="email" autocomplete="email" placeholder="you@gmail.com" required>
+            </label>
+            <button id="signupBtn" type="submit" class="btn btn-primary">Sign Up With Gmail</button>
+          </form>
+          <p class="mini-note">This sends a verification code to your Gmail and redirects you to login.</p>
+          <p id="signupMessage" class="message" role="status" aria-live="polite"></p>
+        </article>
+
+        <article class="auth-card google-box">
+          <p class="eyebrow">Google Option</p>
+          <h2>Use Google Account</h2>
+          <p>If you prefer, continue with Google account authentication and then login to access the workspace.</p>
+          <div id="googleSignupHost" class="google-host"></div>
+          <p id="googleHint" class="mini-note"></p>
+          <ul class="steps">
+            <li><strong>1.</strong> Open Get Started</li>
+            <li><strong>2.</strong> Sign up here</li>
+            <li><strong>3.</strong> Login with Gmail / Google</li>
+            <li><strong>4.</strong> Enter the software</li>
+          </ul>
+          <div class="flow-actions">
+            <a href="login.html" class="btn btn-ghost">Already Signed Up? Login</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; <span id="year"></span> Plutar. Built for independent growth systems.</p>
+      <p class="footer-links">
+        <a href="terms.html">Terms</a>
+        <a href="refund.html">Refund</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </p>
+    </footer>
+  </div>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script>
+    const SIGNUP_EMAIL_KEY = "plutar_signup_email";
+    let googleClientId = "";
+
+    const year = document.getElementById("year");
+    const signupForm = document.getElementById("signupForm");
+    const signupEmail = document.getElementById("signupEmail");
+    const signupBtn = document.getElementById("signupBtn");
+    const signupMessage = document.getElementById("signupMessage");
+    const googleSignupHost = document.getElementById("googleSignupHost");
+    const googleHint = document.getElementById("googleHint");
+
+    if (year) year.textContent = new Date().getFullYear();
+
+    function normalizeEmail(value) {
+      return String(value || "").trim().toLowerCase();
+    }
+
+    function isValidEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizeEmail(value));
+    }
+
+    function isGmail(value) {
+      return /@gmail\.com$/i.test(normalizeEmail(value));
+    }
+
+    function setMessage(text, type) {
+      signupMessage.textContent = text;
+      signupMessage.style.display = text ? "block" : "none";
+      signupMessage.classList.remove("is-error", "is-success");
+      if (type === "error") signupMessage.classList.add("is-error");
+      if (type === "success") signupMessage.classList.add("is-success");
+    }
+
+    function setBusy(isBusy) {
+      signupBtn.disabled = isBusy;
+      signupBtn.textContent = isBusy ? "Creating Signup..." : "Sign Up With Gmail";
+    }
+
+    async function postJSON(url, payload) {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload || {})
+      });
+
+      let data = {};
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
+      }
+
+      if (!response.ok) {
+        throw new Error(data.error || `Request failed (${response.status}).`);
+      }
+      return data;
+    }
+
+    async function loadGoogleClientId() {
+      try {
+        const response = await fetch("/api/public-auth-config", { method: "GET", cache: "no-store" });
+        if (!response.ok) return "";
+        const payload = await response.json();
+        return String(payload?.googleClientId || "").trim();
+      } catch {
+        return "";
+      }
+    }
+
+    function redirectToLogin(email) {
+      if (email) {
+        localStorage.setItem(SIGNUP_EMAIL_KEY, email);
+      }
+      const query = email ? `?email=${encodeURIComponent(email)}&welcome=1` : "";
+      window.location.href = `login.html${query}`;
+    }
+
+    signupForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const email = normalizeEmail(signupEmail.value);
+
+      if (!isValidEmail(email)) {
+        setMessage("Enter a valid email address.", "error");
+        return;
+      }
+
+      if (!isGmail(email)) {
+        setMessage("Use a Gmail address for this flow, or continue with the Google account option.", "error");
+        return;
+      }
+
+      setBusy(true);
+      try {
+        await postJSON("/api/send-login-code", { email });
+        setMessage("Signup started. Verification code sent to Gmail. Redirecting to login...", "success");
+        setTimeout(() => redirectToLogin(email), 700);
+      } catch (error) {
+        setMessage(error.message || "Could not start signup.", "error");
+      } finally {
+        setBusy(false);
+      }
+    });
+
+    async function onGoogleSignup(googleResponse) {
+      setBusy(true);
+      try {
+        const result = await postJSON("/api/google-auth", {
+          credential: googleResponse.credential,
+          intent: "signup"
+        });
+        const email = normalizeEmail(result.email || "");
+        setMessage("Google account verified. Redirecting to login...", "success");
+        setTimeout(() => redirectToLogin(email), 600);
+      } catch (error) {
+        setMessage(error.message || "Google signup failed.", "error");
+      } finally {
+        setBusy(false);
+      }
+    }
+
+    function initGoogleSignup() {
+      const configured = Boolean(googleClientId) && !googleClientId.includes("REPLACE");
+      if (!configured) {
+        googleHint.textContent = "Google button disabled. Set GOOGLE_CLIENT_ID in your server environment.";
+        return;
+      }
+
+      if (!window.google || !window.google.accounts || !window.google.accounts.id) {
+        googleHint.textContent = "Loading Google sign up...";
+        window.setTimeout(initGoogleSignup, 350);
+        return;
+      }
+
+      google.accounts.id.initialize({
+        client_id: googleClientId,
+        callback: onGoogleSignup
+      });
+      google.accounts.id.renderButton(googleSignupHost, {
+        theme: "outline",
+        size: "large",
+        shape: "pill",
+        text: "signup_with",
+        width: 280
+      });
+      googleHint.textContent = "Continue with Google to sign up using your Google account.";
+    }
+
+    async function bootGoogleSignup() {
+      googleClientId = await loadGoogleClientId();
+      initGoogleSignup();
+    }
+
+    bootGoogleSignup();
+  </script>
+</body>
+</html>

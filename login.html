@@ -4,26 +4,109 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login | Plutar</title>
-  <meta name="description" content="Login to your Plutar account to unlock the workspace and start using your product tools.">
-  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="description" content="Login with Gmail verification code or Google account to access your Plutar software workspace.">
+  <meta name="robots" content="noindex,follow">
   <meta name="theme-color" content="#061126">
-  <link rel="canonical" href="https://www.plutar.net/login.html">
   <link rel="icon" type="image/svg+xml" href="plutar-mark.svg?v=3">
-  <link rel="shortcut icon" href="plutar-mark.svg?v=3">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Plutar">
-  <meta property="og:title" content="Login | Plutar">
-  <meta property="og:description" content="Login and access your Plutar workspace.">
-  <meta property="og:url" content="https://www.plutar.net/login.html">
-  <meta property="og:image" content="https://www.plutar.net/plutar-mark.svg">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Login | Plutar">
-  <meta name="twitter:description" content="Login and access your Plutar workspace.">
-  <meta name="twitter:image" content="https://www.plutar.net/plutar-mark.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
+  <style>
+    .auth-wrap {
+      max-width: 980px;
+      margin: 32px auto 24px;
+      padding: 0 4px;
+    }
+    .auth-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .auth-card {
+      padding: 26px;
+      border-radius: 20px;
+      border: 1px solid rgba(179, 220, 255, 0.24);
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .auth-card h1,
+    .auth-card h2 {
+      margin-bottom: 8px;
+      font-size: clamp(1.4rem, 3.2vw, 1.9rem);
+    }
+    .auth-card p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .auth-form {
+      display: grid;
+      gap: 12px;
+    }
+    .auth-form label {
+      display: grid;
+      gap: 6px;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+    .auth-form input {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(179, 220, 255, 0.27);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      padding: 11px 12px;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    .auth-form input:focus {
+      outline: 2px solid rgba(54, 231, 255, 0.5);
+      outline-offset: 0;
+    }
+    .google-host {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .hint {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin: 0;
+    }
+    .message {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(179, 220, 255, 0.28);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      display: none;
+    }
+    .message.is-error {
+      border-color: rgba(255, 127, 143, 0.36);
+      background: rgba(255, 127, 143, 0.1);
+      color: #ffd0d7;
+    }
+    .message.is-success {
+      border-color: rgba(140, 255, 198, 0.42);
+      background: rgba(140, 255, 198, 0.1);
+      color: #d8ffe9;
+    }
+    .divider {
+      margin: 14px 0;
+      border: 0;
+      border-top: 1px solid rgba(179, 220, 255, 0.22);
+    }
+    @media (max-width: 860px) {
+      .auth-grid {
+        grid-template-columns: 1fr;
+      }
+      .auth-card {
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="shell">
@@ -38,68 +121,45 @@
         <span>Plutar</span>
       </a>
       <nav class="nav-group nav-right">
-        <a href="get-started.html">Get Started</a>
-        <a href="login.html">Login</a>
-        <a class="btn btn-ghost" href="app.html">Member Booking</a>
+        <a href="signup.html">Sign Up</a>
+        <a class="btn btn-ghost" href="app.html">Open App</a>
       </nav>
     </header>
 
-    <section class="hero panel">
-      <div>
-        <p class="eyebrow">Member Access</p>
-        <h1>Login before using the product.</h1>
-        <p>
-          This is the step between setup and product usage.
-          Sign in through the access portal to unlock the full workspace.
-        </p>
-        <div class="hero-actions">
-          <a href="app.html" class="btn btn-primary">Open Login Portal</a>
-          <a href="pricing.html" class="btn btn-ghost">View Prices</a>
-          <a href="get-started.html" class="btn btn-ghost">Back To Setup</a>
-        </div>
-      </div>
-      <div class="metrics">
-        <article class="metric">
-          <strong>Owner</strong>
-          <span>Owner email is auto-elevated for account administration.</span>
-        </article>
-        <article class="metric">
-          <strong>Customer</strong>
-          <span>Use verified email and get automatic paid access from Stripe.</span>
-        </article>
-        <article class="metric">
-          <strong>Step Flow</strong>
-          <span>Setup -> Login -> Use Product.</span>
-        </article>
-        <article class="metric">
-          <strong>Security</strong>
-          <span>Paid-member booking remains locked behind authenticated access.</span>
-        </article>
-      </div>
-    </section>
+    <section class="panel auth-wrap">
+      <div class="auth-grid">
+        <article class="auth-card">
+          <p class="eyebrow">Step 2 - Login</p>
+          <h1>Login With Gmail Code</h1>
+          <p>Use your Gmail or Google account email. We will send a 6-digit code, then you can enter the software.</p>
 
-    <section class="section panel">
-      <h2>Need Access First?</h2>
-      <p class="sub">
-        If you do not have credentials yet, use the setup guide first.
-      </p>
-      <div class="grid-3">
-        <article class="feature">
-          <h3>1) Choose Plan</h3>
-          <p>Pick Free, Starter, or Pro from the prices page.</p>
+          <form id="loginCodeForm" class="auth-form">
+            <label for="emailInput">
+              Gmail / Email
+              <input id="emailInput" name="email" type="email" autocomplete="email" placeholder="you@gmail.com" required>
+            </label>
+            <button id="sendCodeBtn" type="button" class="btn btn-ghost">Send Verification Code</button>
+            <label for="codeInput">
+              Verification Code
+              <input id="codeInput" name="code" type="text" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="6-digit code" required>
+            </label>
+            <button id="verifyBtn" type="submit" class="btn btn-primary">Verify & Continue</button>
+          </form>
+          <p id="loginMessage" class="message" role="status" aria-live="polite"></p>
         </article>
-        <article class="feature">
-          <h3>2) Complete Setup</h3>
-          <p>Follow the setup guide and prepare your account for login.</p>
+
+        <article class="auth-card">
+          <p class="eyebrow">Google Login</p>
+          <h2>Continue with Google</h2>
+          <p>Login with your Google account instead of entering a code manually.</p>
+          <div id="googleLoginHost" class="google-host"></div>
+          <p id="googleHint" class="hint"></p>
+          <hr class="divider">
+          <p class="hint">No account yet? Use Get Started to sign up first.</p>
+          <div class="flow-actions">
+            <a href="signup.html" class="btn btn-ghost">Go To Sign Up</a>
+          </div>
         </article>
-        <article class="feature">
-          <h3>3) Login + Use</h3>
-          <p>Enter your credentials and start generating assets in the app.</p>
-        </article>
-      </div>
-      <div class="hero-actions" style="margin-top: 14px;">
-        <a href="get-started.html" class="btn btn-primary">Open Setup Guide</a>
-        <a href="app.html" class="btn btn-ghost">Go To App Login</a>
       </div>
     </section>
 
@@ -114,6 +174,241 @@
     </footer>
   </div>
 
-  <script src="main.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script>
+    const SESSION_KEY = "plutar_app_session";
+    const SIGNUP_EMAIL_KEY = "plutar_signup_email";
+    let googleClientId = "";
+
+    const emailInput = document.getElementById("emailInput");
+    const codeInput = document.getElementById("codeInput");
+    const loginForm = document.getElementById("loginCodeForm");
+    const sendCodeBtn = document.getElementById("sendCodeBtn");
+    const verifyBtn = document.getElementById("verifyBtn");
+    const loginMessage = document.getElementById("loginMessage");
+    const googleLoginHost = document.getElementById("googleLoginHost");
+    const googleHint = document.getElementById("googleHint");
+    const year = document.getElementById("year");
+
+    if (year) year.textContent = new Date().getFullYear();
+
+    function normalizeEmail(value) {
+      return String(value || "").trim().toLowerCase();
+    }
+
+    function isValidEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizeEmail(value));
+    }
+
+    function isValidCode(value) {
+      return /^\d{6}$/.test(String(value || "").trim());
+    }
+
+    function normalizeAccessLevel(value, paid, role) {
+      const clean = String(value || "").toLowerCase();
+      if (String(role || "").toLowerCase() === "owner") return "owner";
+      if (clean === "paid" || clean === "registered") return clean;
+      return paid ? "paid" : "registered";
+    }
+
+    function setMessage(text, type) {
+      loginMessage.textContent = text;
+      loginMessage.style.display = text ? "block" : "none";
+      loginMessage.classList.remove("is-error", "is-success");
+      if (type === "error") loginMessage.classList.add("is-error");
+      if (type === "success") loginMessage.classList.add("is-success");
+    }
+
+    function setBusy(isBusy, verifyLabel) {
+      sendCodeBtn.disabled = isBusy;
+      verifyBtn.disabled = isBusy;
+      verifyBtn.textContent = isBusy ? (verifyLabel || "Verifying...") : "Verify & Continue";
+    }
+
+    async function postJSON(url, payload) {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload || {})
+      });
+
+      let data = {};
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
+      }
+
+      if (!response.ok) {
+        throw new Error(data.error || `Request failed (${response.status}).`);
+      }
+      return data;
+    }
+
+    async function loadGoogleClientId() {
+      try {
+        const response = await fetch("/api/public-auth-config", { method: "GET", cache: "no-store" });
+        if (!response.ok) return "";
+        const payload = await response.json();
+        return String(payload?.googleClientId || "").trim();
+      } catch {
+        return "";
+      }
+    }
+
+    function saveSession(result, fallbackEmail) {
+      const email = normalizeEmail(result.email || fallbackEmail || "");
+      const role = result.role === "owner" ? "owner" : "member";
+      const plan = role === "owner"
+        ? "owner"
+        : (String(result.plan || "starter").toLowerCase() === "pro" ? "pro" : "starter");
+      const paid = Boolean(result.paid || role === "owner");
+      const accessLevel = normalizeAccessLevel(result.accessLevel, paid, role);
+      const provider = String(result.provider || "email").toLowerCase();
+      const token = String(result.accessToken || "").trim();
+
+      if (!token) {
+        throw new Error("Secure session token missing. Try again.");
+      }
+
+      localStorage.setItem(SESSION_KEY, JSON.stringify({
+        role,
+        plan,
+        paid,
+        accessLevel,
+        provider,
+        email,
+        token,
+        signedAt: new Date().toISOString()
+      }));
+
+      if (email) {
+        localStorage.setItem(SIGNUP_EMAIL_KEY, email);
+      }
+    }
+
+    function preloadEmail() {
+      const params = new URLSearchParams(window.location.search);
+      const fromQuery = normalizeEmail(params.get("email"));
+      const fromStorage = normalizeEmail(localStorage.getItem(SIGNUP_EMAIL_KEY));
+      const preferred = isValidEmail(fromQuery) ? fromQuery : fromStorage;
+      if (preferred) {
+        emailInput.value = preferred;
+      }
+      if (params.get("welcome") === "1") {
+        setMessage("Signup complete. Login now with Gmail or Google.", "success");
+      }
+    }
+
+    sendCodeBtn.addEventListener("click", async () => {
+      const email = normalizeEmail(emailInput.value);
+      if (!isValidEmail(email)) {
+        setMessage("Enter a valid email before requesting a code.", "error");
+        return;
+      }
+
+      setBusy(true, "Sending...");
+      try {
+        await postJSON("/api/send-login-code", { email });
+        setMessage("Verification code sent. Check inbox and spam folder.", "success");
+      } catch (error) {
+        setMessage(error.message || "Could not send verification code.", "error");
+      } finally {
+        setBusy(false);
+      }
+    });
+
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const email = normalizeEmail(emailInput.value);
+      const code = String(codeInput.value || "").trim();
+
+      if (!isValidEmail(email)) {
+        setMessage("Enter a valid email address.", "error");
+        return;
+      }
+      if (!isValidCode(code)) {
+        setMessage("Enter the 6-digit verification code.", "error");
+        return;
+      }
+
+      setBusy(true);
+      try {
+        const result = await postJSON("/api/verify-login-code", { email, code });
+        if (!result.accessGranted) {
+          setMessage("Access was not granted yet for this email.", "error");
+          return;
+        }
+
+        saveSession(result, email);
+        setMessage("Login successful. Redirecting to app...", "success");
+        setTimeout(() => {
+          window.location.href = "app.html";
+        }, 650);
+      } catch (error) {
+        setMessage(error.message || "Verification failed. Try again.", "error");
+      } finally {
+        setBusy(false);
+      }
+    });
+
+    async function onGoogleLogin(googleResponse) {
+      setBusy(true, "Signing in...");
+      try {
+        const result = await postJSON("/api/google-auth", {
+          credential: googleResponse.credential,
+          intent: "login"
+        });
+        if (!result.accessGranted) {
+          setMessage("Google login did not return access.", "error");
+          return;
+        }
+        saveSession(result, result.email);
+        setMessage("Google login successful. Redirecting to app...", "success");
+        setTimeout(() => {
+          window.location.href = "app.html";
+        }, 650);
+      } catch (error) {
+        setMessage(error.message || "Google login failed.", "error");
+      } finally {
+        setBusy(false);
+      }
+    }
+
+    function initGoogleLogin() {
+      const configured = Boolean(googleClientId) && !googleClientId.includes("REPLACE");
+      if (!configured) {
+        googleHint.textContent = "Google button disabled. Set GOOGLE_CLIENT_ID in your server environment.";
+        return;
+      }
+
+      if (!window.google || !window.google.accounts || !window.google.accounts.id) {
+        googleHint.textContent = "Loading Google login...";
+        window.setTimeout(initGoogleLogin, 350);
+        return;
+      }
+
+      google.accounts.id.initialize({
+        client_id: googleClientId,
+        callback: onGoogleLogin
+      });
+      google.accounts.id.renderButton(googleLoginHost, {
+        theme: "outline",
+        size: "large",
+        shape: "pill",
+        text: "continue_with",
+        width: 300
+      });
+      googleHint.textContent = "Use the same Google account you used during signup.";
+    }
+
+    preloadEmail();
+    async function bootGoogleLogin() {
+      googleClientId = await loadGoogleClientId();
+      initGoogleLogin();
+    }
+
+    bootGoogleLogin();
+  </script>
 </body>
 </html>
